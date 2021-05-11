@@ -122,6 +122,7 @@ $name = $_GET['good_id'];
                     <input type="hidden" name="quantity" value="1">
                     <input type="hidden" name="total" value="<?=$row['good_price']?>">
                     <button class="btn btn--radius-2 btn--red" type="submit" name="buy" value="Add to Cart"> Add to Cart </button>
+                    <button class="btn btn--radius-2 btn--red"> <a href="goodList.php">Back</a></button>
                    
 
                     <?php
