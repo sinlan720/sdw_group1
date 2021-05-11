@@ -23,7 +23,12 @@ if (!isset($_SESSION['username'])) {
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 <?php include"../../includes/head.php";?>
-
+<style>
+input {
+  border-style: solid;
+  border-color: grey;
+}
+</style>
 <body>
   <div class="wrapper" id="wrapper">
     <?php 
