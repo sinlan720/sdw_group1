@@ -34,7 +34,26 @@ $view_variable = 'a string here';
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 <?php include"../../includes/head.php";?>
+<style>
 
+th {
+  font-size: 17px;
+  font-weight: bold;
+  color:Black;"
+}
+p1 {
+  font-size: 19px;
+  font-weight: bold;
+  color:Black;"
+}
+
+p2 {
+  font-size: 14px;
+  font-weight: bold;
+  color:Black;"
+}
+
+</style>
 <body>
 
 
@@ -80,18 +99,20 @@ $view_variable = 'a string here';
             <th>Image</th>
             <th>Price</th>
             <th></th>
-            <th>Action</th>
+      
+            <th>  Action</th>
             </thead>
             <?php
+        
             $i = 1;
             foreach($data as $row){
               $image =  $row['good_image'];
               $isrc = "../../images/";
 
                echo "<tr>"
-                . "<td>".$row['good_name']."</td>"
+                . "<td><p2>".$row['good_name']."</font>"."</p2></td>"
                 . "<td><img src=\"" .$isrc. $row['good_image'] . "\" height=\"130\" width=\"150\"> </td>"
-                ."<td>RM".$row['good_price']."</td>";                         
+                ."<td><p1>RM".$row['good_price']."</p1></td>";                         
                        // . "<td>".$row['good_price']."</td>";
                ?>
                  <td></td>
