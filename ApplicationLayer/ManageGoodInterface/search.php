@@ -31,9 +31,36 @@ $view_variable = 'a string here';
 }
 
 ?>
+
+<?php
+
+if(isset($_POST['search']))
+{
+    $valueToSearch = $_POST['valueToSearch'];
+    // search in all table columns
+    // using concat mysql function
+    $query = "SELECT * FROM `good` WHERE good_name LIKE '%".$valueToSearch."%'";
+    $search_result = filterTable($query);
+    
+}
+ else {
+    $query = "SELECT * FROM `good`";
+    $search_result = filterTable($query);
+}
+
+// function to connect and execute the query
+function filterTable($query)
+{
+    $connect = mysqli_connect("localhost", "root", "", "sdw");
+    $filter_Result = mysqli_query($connect, $query);
+    return $filter_Result;
+}
+
+?>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 <?php include"../../includes/head.php";?>
+
 <style>
 
 th {
@@ -53,8 +80,21 @@ p2 {
   color:Black;"
 }
 
+
+p3 {
+  border-style: solid;
+  border-color: grey;
+}
+
 </style>
 <body>
+
+
+ 
+                            
+<body>
+
+
 
 <div class="wrapper" id="wrapper">
         
@@ -70,25 +110,19 @@ p2 {
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="bradcaump__inner text-center">
-              <h2 class="bradcaump-title">Good List</h2>
+              <h2 class="bradcaump-title">Good Searching</h2>
               <nav class="bradcaump-inner">
-                <a class="breadcrumb-item" href="../../ApplicationLayer/ManageGoodInterface/goodHome.php">Good Delivery</a>
+                <a class="breadcrumb-item" href="../../ApplicationLayer/ManageGoodInterface/goodList.php">Good List</a>
                 <span class="brd-separetor"><i class="zmdi zmdi-long-arrow-right"></i></span>
-                <span class="breadcrumb-item active">Good List</span>
-              </nav>
-                       
-                
-
-            </div>
+                <span class="breadcrumb-item active">Good Searching</span>
+              </nav>  
+                </div>
           </div>
         </div>
       </div>
     </div>
 
-
-
-       
-          
+    
 
   </div>
 <section class="type__category__area bg--white section-padding">
@@ -98,7 +132,7 @@ p2 {
   <div class="wrapper wrapper--w790">
     <div class="card card-5">
       <div class="card-heading">
-        <h2 class="title">Good List</h2>
+        <h2 class="title">Good Searching</h2>
       </div>
       <div class="card-body">
       
@@ -114,25 +148,26 @@ p2 {
       
             <th>  Action</th>
             </thead>
-
+           
+           
+      
             <form action="search.php" method="post">
-          
-            <input type="submit" button class="btn btn--radius-2 btn--red" name="search" value="Go For Searching"><br></br>
-            <br></br>
-            <?php
-        
-            $i = 1;
-            foreach($data as $row){
-              $image =  $row['good_image'];
-              $isrc = "../../images/";
+           <p3> <input type="text"  name="valueToSearch" placeholder="Search Good Name"></p3><br><br>
+            <input type="submit" button class="btn btn--radius-2 btn--red" name="search" value="Search"><br></br>
 
-               echo "<tr>"
-                . "<td><p2>".$row['good_name']."</font>"."</p2></td>"
-                . "<td><img src=\"" .$isrc. $row['good_image'] . "\" height=\"130\" width=\"150\"> </td>"
-                ."<td><p1>RM".$row['good_price']."</p1></td>";                         
-                       // . "<td>".$row['good_price']."</td>";
-               ?>
-                 <td></td>
+            
+
+      <!-- populate table from mysql database -->
+                <?php while($row = mysqli_fetch_array($search_result)):
+                     $image =  $row['good_image'];
+                     $isrc = "../../images/";
+                
+                     echo "<tr>"
+                     . "<td><p2>".$row['good_name']."</font>"."</p2></td>"
+                     . "<td><img src=\"" .$isrc. $row['good_image'] . "\" height=\"130\" width=\"150\"> </td>"
+                     ."<td><p1>RM".$row['good_price']."</p1></td>";
+                    ?>
+                    <td></td>
             <td><form action="" method="POST">
               <?php
               if ($_SESSION['usergroup'] == 1) {
@@ -145,7 +180,8 @@ p2 {
               <input type="hidden" name="quantity" value="1">
               <button class="btn btn--radius-2 btn--red" type="submit" name="buy" value="BUY">Buy</button>
                <br></br>
-              <?php
+                </tr>
+                <?php
             } elseif ($_SESSION['usergroup'] == 2){ ?>
               <button class="btn btn--radius-2 btn--red" input type="button" name="view" value="View" onclick="location.href='../../ApplicationLayer/ManageGoodInterface/view.php?good_id=<?=$row['good_id']?>'">View</button>
               <br></br>
@@ -155,18 +191,14 @@ p2 {
                <br></br>
               <?php
             }?>
-
-                </form></td>
-              <?php
-              $i++;
-             echo "</tr>";
-            }
-            ?>
-        </table>
-      </center>
-      </div>
-    </center>
-</section>
+                <?php endwhile;?>
+                
+            </table>
+        </form>
+        <br></br>
+        <br></br>
+        <button class="btn btn--radius-2 btn--red"> <a href="goodList.php">Back</a></button>
+        </section>
 
 
 <?php
