@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jul 14, 2020 at 06:56 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.2
+-- Host: 127.0.0.1
+-- Generation Time: May 27, 2021 at 01:55 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `SDW`
+-- Database: `sdw`
 --
 
 -- --------------------------------------------------------
@@ -67,21 +66,23 @@ CREATE TABLE `customer` (
   `cust_zipcode` varchar(256) NOT NULL,
   `username` varchar(30) NOT NULL,
   `password` varchar(30) NOT NULL,
-  `usergroup` int(11) NOT NULL
+  `usergroup` int(11) NOT NULL,
+  `token` varchar(255) DEFAULT NULL,
+  `verified` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`cust_id`, `cust_name`, `cust_email`, `cust_phone`, `cust_address`, `cust_address2`, `cust_city`, `cust_state`, `cust_zipcode`, `username`, `password`, `usergroup`) VALUES
-(1, 'Mumin Elhassan', 'muminelhassan98@gmail.com', '0168150529', 'Kolej Kediaman 4', 'Lebuhraya Tun Razak', 'Kuantan', 'Pahang', '26300', 'muminaya', 'muminaya', 1),
-(2, 'Min Xuan', 'minxuan@hotmail.com', '0124335678', 'Jalan Bahagia', 'Taman Jelita', 'Kuantan', 'Pahang', '26300', 'minxuan', 'minxuan', 1),
-(3, 'Sin Lan', 'sinlan@hotmail.com', '0129988765', '12', 'Jalan Intan', 'Kuantan', 'Pahang', '26300', 'sinlan', 'sinlan', 1),
-(4, 'Syahril', 'syahril@gmail.com', '0121334122', '123', 'Lebuhraya Razak', 'Kuantan', 'Pahang', '26300', 'syahril', 'syahril', 1),
-(5, 'Kok Jiung', 'kokjiung@hotmail.com', '0164534342', '45', 'Kuala Sungai Pinang', 'Kuantan', 'Pahang', '26300', 'kokjiung', 'kokjiung', 1),
-(6, 'Rasydan', 'rasydan@hotmail.com', '0123423223', '9', 'Taman Indah', 'Kuantan', 'Pahang', '26300', 'rasydan', 'rasydan', 1),
-(18, 'Hh', 'h@j.j', '1', 'h', 'h', 'h', 'h', 'h', 'h', 'h', 1);
+INSERT INTO `customer` (`cust_id`, `cust_name`, `cust_email`, `cust_phone`, `cust_address`, `cust_address2`, `cust_city`, `cust_state`, `cust_zipcode`, `username`, `password`, `usergroup`, `token`, `verified`) VALUES
+(1, 'Mumin Elhassan', 'muminelhassan98@gmail.com', '0168150529', 'Kolej Kediaman 4', 'Lebuhraya Tun Razak', 'Kuantan', 'Pahang', '26300', 'muminaya', 'muminaya', 1, NULL, NULL),
+(2, 'Min Xuan', 'minxuan@hotmail.com', '0124335678', 'Jalan Bahagia', 'Taman Jelita', 'Kuantan', 'Pahang', '26300', 'minxuan', 'minxuan', 1, NULL, 1),
+(3, 'Sin Lan', 'sinlan@hotmail.com', '0129988765', '12', 'Jalan Intan', 'Kuantan', 'Pahang', '26300', 'sinlan', 'sinlan', 1, NULL, 1),
+(4, 'Syahril', 'syahril@gmail.com', '0121334122', '123', 'Lebuhraya Razak', 'Kuantan', 'Pahang', '26300', 'syahril', 'syahril', 1, NULL, 1),
+(5, 'Kok Jiung', 'kokjiung@hotmail.com', '0164534342', '45', 'Kuala Sungai Pinang', 'Kuantan', 'Pahang', '26300', 'kokjiung', 'kokjiung', 1, NULL, 1),
+(6, 'Rasydan', 'rasydan@hotmail.com', '0123423223', '9', 'Taman Indah', 'Kuantan', 'Pahang', '26300', 'rasydan', 'rasydan', 1, NULL, 1),
+(18, 'Hh', 'h@j.j', '1', 'h', 'h', 'h', 'h', 'h', 'h', 'h', 1, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -482,7 +483,7 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `cust_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `cust_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `food`
