@@ -61,6 +61,79 @@ class providerController{
         }
     }
     
+
+    function reset(){
+        $provider = new providerModel();
+        $provider->email = $_POST['email'];
+
+        if($provider->check() > 0){
+            $token = "0123456789";
+            $token = str_shuffle($token);
+            $provider->token = substr($token, 0, 10);
+
+           if($provider->addToken() > 0){
+
+              $to      = $_POST['email']; // Send email to our user
+              $subject = 'Reset Password'; // Give the email a subject 
+              $msg = '
+  
+              Thanks for signing up!
+              Your account has been created, you can login with the following emails after you have activated your account by pressing the url below.
+  
+              ------------------------
+              Email: '.$_POST["email"].'
+              ------------------------
+    
+              Please click this link to reset your account:
+              http://localhost/sdw/sdw_group1/ApplicationLayer/ManageLoginInterface/setNewPassword.php?email='.$_POST['email'].'&token='.$provider->token.'&user_type='.$_POST['user_type'].'
+    
+              '; // Our message above including the link
+                        
+              $headers = 'From:noreply@yourwebsite.com' . "\r\n"; // Set from headers
+              
+              if(mail($to, $subject, $msg, $headers)){
+                  $message = "Please check your email inbox.";
+                  echo "<script type='text/javascript'>alert('$message');
+                  window.location = '../../ApplicationLayer/ManageLoginInterface/login.php';</script>";
+              } // Send our email
+              else
+              {
+                  $message = "Failed while sending email";
+                  echo "<script type='text/javascript'>alert('$message');
+                  window.location = '../../ApplicationLayer/ManageLoginInterface/forgotPassword.php';</script>";
+              }
+
+            }
+              else{
+              $message = "Error! Please try again.";
+              echo "<script type='text/javascript'>alert('$message');
+              window.location = '../../ApplicationLayer/ManageLoginInterface/forgotPassword.php';</script>";
+              // send to providerMode
+              }
+           }
+           else{
+            $message = "Error! Email does not exist.";
+              echo "<script type='text/javascript'>alert('$message');
+              window.location = '../../ApplicationLayer/ManageLoginInterface/login.php';</script>";
+            }
+        
+
+          }
+      
+
+
+      function setPw($email, $token){
+        $providerModel = new providerModel();
+        $providerModel->email = $email;
+        $providerModel->token = $token;
+        $providerModel->password = $_POST['password'];
+
+        if($providerModel->set_newPW() > 0){
+            $message = 'Your new password is reset. Please change the password after login.';
+            echo "<script type = 'text/javascript'>alert('$message');
+            window.location = '../../ApplicationLayer/ManageLoginInterface/login.php';</script>";
+        }
+      }
     
   //   function delete(){
   //       $provider = new providerModel();

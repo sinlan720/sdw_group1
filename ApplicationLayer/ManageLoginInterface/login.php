@@ -8,12 +8,23 @@
 		$username = mysqli_real_escape_string($db,$_POST['username']);
 		$password = mysqli_real_escape_string($db,$_POST['password']);
 		$userType = mysqli_real_escape_string($db,$_POST['userType']);
+
 		// $password = md5($password); // remember we hashed password before storing last time
 		$sql = "SELECT * FROM $userType WHERE username='$username' AND password='$password'";
 		$result = mysqli_query($db,$sql);
+		
+
+
 		if (!$result)
            echo(mysqli_error($db));
 		if (mysqli_num_rows($result) > 0) {
+
+			$sql1 = "SELECT * FROM $userType WHERE username='$username' AND password='$password' AND verified = 1 ";
+			$result1 = mysqli_query($db,$sql1);
+			if (!$result1)
+           	echo(mysqli_error($db));
+           	if (mysqli_num_rows($result1) > 0) {
+
             $row = mysqli_fetch_row($result);
             // if ($row[8] == 0) {
             //     $_SESSION['message'] = "Your account is not yet activated You will be activated shortly, you can try again shortly";
@@ -25,13 +36,27 @@
 			$_SESSION['username'] = $username;
             $_SESSION['usergroup'] = $row[11];
             $_SESSION['userid'] = $row[0];
+
+
+
+			    if(!empty($_POST["remember"])) {
+				setcookie ("username",$_POST["username"],time()+ 3600 * 10);
+				setcookie ("password",$_POST["password"],time()+ 3600 * 10);
+				echo "Cookies Set Successfuly";
+			} else {
+				setcookie("username","");
+				setcookie("password","");
+				echo "Cookies Not Set";
+}
 			header("location: ../../ApplicationLayer/ManageLoginInterface/home.php"); //redirect to the products page
-            
+            }else
+            $_SESSION['message'] = "Account not verified";
             // }
 		}else{
 			$_SESSION['message'] = "Username/password combination incorrect";
 		}
 	}
+
 ?>
 
 
@@ -68,7 +93,7 @@ input {
             <div class="bradcaump__inner text-center">
               <h2 class="bradcaump-title">Welcome to ECRS</h2>
               <nav class="bradcaump-inner">
-                <a class="breadcrumb-item" href="index.php">Login</a>
+                
           
               </nav>
             </div>
@@ -90,7 +115,7 @@ input {
 					<div class='name'>Username: </div>
 					<div class='value'>
 						<div class='input-group'>
-							<input type="text" name="username" class="input--style-5">
+							<input type="text" name="username" value="<?php if(isset($_COOKIE["username"])) { echo $_COOKIE["username"]; } ?>" class="input--style-5">
 						</div>
 					</div>
 				</div>
@@ -98,10 +123,29 @@ input {
 					<div class='name'>Password: </div>
 					<div class='value'>
 						<div class='input-group'>
-							<input type="password" name="password" class="input--style-5">
+							<input type="password" name="password" value="<?php if(isset($_COOKIE["password"])) { echo $_COOKIE["password"]; } ?>" class="input--style-5">
 						</div>
 					</div>
 				</div>
+				<div class='form-row'>
+					<div class='name' ><input type="checkbox" name="remember"></div>
+					<div class='value'>
+						<div class='input-group'>
+							Remember me </div>
+					</div>
+				</div>
+
+				<div class='form-row'>
+					<div class='name' ></div>
+					<div class='value'>
+						<div class='input-group'>
+							<button><a href="forgotPassword.php">Forgot Password</a></button></div>
+							
+					</div>
+				</div>
+
+				
+
 				<div class='form-row'>
 					<div class='name'>User Type: </div>
 					<div class='value'>

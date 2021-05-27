@@ -26,6 +26,10 @@ if(isset($_POST['register'])){
     }else {
         $_SESSION['message'] = "The passwords don't match";
     }
+
+    
+
+
 } 
 
 ?>
@@ -38,6 +42,8 @@ input {
   border-color: grey;
 }
 </style>
+
+
 
 <body>
     <div class="wrapper" id="wrapper">
@@ -59,7 +65,7 @@ input {
             <div class="bradcaump__inner text-center">
               <h2 class="bradcaump-title">Welcome to ECRS</h2>
               <nav class="bradcaump-inner">
-                <a class="breadcrumb-item" href="index.php">Registration</a>
+                
          
               </nav>
             </div>
@@ -154,18 +160,53 @@ input {
                             <div class='name'>Password: </div>
                             <div class='value'>
                                 <div class='input-group'>
-                                    <input type="password" name="password" class="input--style-5" required>
+                                    <input type="password" name="password" id="p1" class="input--style-5" required>
                                 </div>
                             </div>
                         </div>
                         <div class='form-row'>
+                            <div class='name' ><input type="checkbox" name="showme" onclick="myFunction()" ></div>
+                            <div class='value'>
+                                <div class='input-group'>
+                                    Show me </div>
+                            </div>
+                        </div>
+                        <script>
+                        function myFunction() {
+                          var x = document.getElementById("p1");
+                          if (x.type === "password") {
+                            x.type = "text";
+                          } else {
+                            x.type = "password";
+                          }
+                        }
+                        </script>
+                        <div class='form-row'>
                             <div class='name'>Retype Password: </div>
                             <div class='value'>
                                 <div class='input-group'>
-                                    <input type="password" name="password2" class="input--style-5" required>
+                                    <input type="password" name="password2" id="p2" class="input--style-5" required>
+
                                 </div>
                             </div>
                         </div>
+                        <div class='form-row'>
+                            <div class='name' ><input type="checkbox" name="showme" onclick="myFunction1()"></div>
+                            <div class='value'>
+                                <div class='input-group'>
+                                    Show me </div>
+                            </div>
+                        </div>
+                        <script>
+                        function myFunction1() {
+                          var x = document.getElementById("p2");
+                          if (x.type === "password") {
+                            x.type = "text";
+                          } else {
+                            x.type = "password";
+                          }
+                        }
+                        </script>
                         <div class='form-row'>
                             <div class='name'>User Type: </div>
                             <div class='value'>

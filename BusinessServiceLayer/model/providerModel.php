@@ -33,6 +33,33 @@ class providerModel{
         $args = [':provider_id'=>$this->provider_id,':name'=>$this->name, ':email'=>$this->email, ':phone'=>$this->phone, ':address'=>$this->address, ':address2'=>$this->address2, ':city'=>$this->city, ':state'=>$this->state, ':zipcode'=>$this->zipcode,':username'=>$this->username,':password'=>$this->password];
         return DB::run($sql,$args);
     }
+
+
+    function check(){
+        $sql = "select * from provider where provider_email=:email";
+        $args = [':email'=>$this->email];
+        $stmt = DB::run($sql, $args);
+        $count = $stmt->rowCount();
+        return $count;
+    }
+
+    function addToken(){
+        $sql = "update provider set token=:token where provider_email=:email";
+        $args = [':token'=>$this->token, 'email'=>$this->email];
+        $stmt = DB::run($sql, $args);
+        $count = $stmt->rowCount();
+        return $count;
+    }
+
+    function set_newPW(){
+        $sql = "update provider set password=:password where provider_email=:email and token=:token";
+
+        $args = [':password'=>$this->password, ':token'=>$this->token, ':email'=>$this->email];
+        $stmt = DB::run($sql, $args);
+        $count = $stmt->rowCount();
+        return $count;
+
+    }
     
     // function deleteStud(){
     //     $sql = "delete from student where stud_ic=:stud_ic";
