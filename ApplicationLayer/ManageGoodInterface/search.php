@@ -34,6 +34,7 @@ $view_variable = 'a string here';
 
 <?php
 
+
 if(isset($_POST['search']))
 {
     $valueToSearch = $_POST['valueToSearch'];
