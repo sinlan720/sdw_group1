@@ -19,7 +19,12 @@
            echo(mysqli_error($db));
 		if (mysqli_num_rows($result) > 0) {
 
-			$sql1 = "SELECT * FROM $userType WHERE username='$username' AND password='$password' AND verified = 1 ";
+			if (userType == "customer"){
+				$sql1 = "SELECT * FROM $userType WHERE username='$username' AND password='$password' AND verified = 1 ";
+			}else {
+				$sql1 = "SELECT * FROM $userType WHERE username='$username' AND password='$password' ";
+			}
+			
 			$result1 = mysqli_query($db,$sql1);
 			if (!$result1)
            	echo(mysqli_error($db));
