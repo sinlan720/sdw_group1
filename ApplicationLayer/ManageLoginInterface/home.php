@@ -64,19 +64,50 @@ if ($_SESSION['usergroup'] == 1 || 2){?>
 <div class="good__category__wrapper mt--40">
 <div style="background-image: url('../../images/h3.jpg'); background-size:900px 950px">
   <div class="row">
-    <!-- Start Single Category -->
+    
+     <!-- Start Single Category -->
     <div class="col-lg-4 col-md-6 col-sm-12">
       <div class="food__item foo">
         <div class="food__thumb">
-          <a href="../../ApplicationLayer/ManageFoodInterface/foodHome.php">
+          
+          <?php
+      if ($_SESSION['usergroup'] == 1) { ?>
+      </div>
+        <div>
+            <a href="../../ApplicationLayer/ManageFoodInterface/foodList.php">
             <img src="../../images/food.png" alt="product images" width="500" height="333" style="margin-right: 125px; margin-left:109px;"> 
-          </a>
+            </a>
+            <div class="food__title">
+              <h5><a href="../../ApplicationLayer/ManageFoodInterface/foodList.php" style="font-weight:bold; color:#8909DD; font-size:45px; padding:10px;  margin-left:215px; width: 200px;">Food Delivery</a></h5>
+            </div>
         </div>
-        <div class="food__title">
-          <h5><a href="../../ApplicationLayer/ManageFoodInterface/foodHome.php" style="font-weight:bold; color:#8909DD; font-size:45px; padding:10px;  margin-left:215px; width: 200px;">Food Delivery</a></h5>
+        <?php
+      } elseif ($_SESSION['usergroup'] == 2) { ?>
+      </div> 
+        <div>
+            <a href="../../ApplicationLayer/ManageFoodInterface/foodHome.php">  
+            <img src="../../images/food.png" alt="product images" width="500" height="333" style="margin-right: 125px; margin-left:109px;">  
+            </a>
+            <div class="food__title">
+              <h5><a href="../../ApplicationLayer/ManageFoodInterface/foodHome.php" style="font-weight:bold; color:#8909DD; font-size:45px; padding:10px;  margin-left:215px; width: 200px;">Food Delivery</a></h5>
+            </div>
         </div>
+        <?php
+     }elseif ($_SESSION['usergroup'] == 3) { ?>
+       </div> 
+       <div>
+            <a href="../../ApplicationLayer/ManageFoodInterface/foodHome.php">  
+            <img src="../../images/food.png" alt="product images" width="500" height="333" style="margin-right: 125px; margin-left:109px;">  
+            </a>
+            <div class="food__title">
+              <h5><a href="../../ApplicationLayer/ManageFoodInterface/foodHome.php" style="font-weight:bold; color:#8909DD; font-size:45px; padding:10px;  margin-left:215px; width: 200px;">Food Delivery</a></h5>
+            </div>
+        </div>
+        <?php
+     } ?>
       </div>
     </div>
+    
     <!-- End Single Category -->
     <!-- Start Single Category -->
     <div class="col-lg-4 col-md-6 col-sm-12">
