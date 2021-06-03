@@ -30,7 +30,7 @@ if (!isset($_SESSION['username'])) {
     include "../../includes/header.php";
     ?>
 
-    <div style="background-image: url('../../images/foodList.jpg');">
+    <div style="background-image: url('../../images/You Stay at Home.png');">
 
     <div class="ht__bradcaump__wrap d-flex align-items-center">
       <div class="container">
@@ -39,7 +39,7 @@ if (!isset($_SESSION['username'])) {
             <div class="bradcaump__inner text-center">
               <h2 class="bradcaump-title">Edit Food</h2>
               <nav class="bradcaump-inner">
-                <a class="breadcrumb-item" href="../../ApplicationLayer/ManageLoginInterface/index.php">Food List</a>
+                <a class="breadcrumb-item" href="../../ApplicationLayer/ManageFoodInterface/foodlist.php">Food List</a>
                 <span class="brd-separetor"><i class="zmdi zmdi-long-arrow-right"></i></span>
                 <span class="breadcrumb-item active">Edit Food</span>
               </nav>
@@ -53,7 +53,7 @@ if (!isset($_SESSION['username'])) {
 <!-- End Slider Area -->
 <!-- Start Service Area -->
 <section class="type__category__area bg--white section-padding">
-    <div style="background-image: url('../../images/goodMenu.jpg');">
+    <div style="background-image: url('../../images/');">
   <div class="wrapper wrapper--w790">
     <div class="card card-5">
       <div class="card-heading">
