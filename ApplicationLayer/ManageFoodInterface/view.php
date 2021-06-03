@@ -39,18 +39,18 @@ $name = $_GET['food_id'];
     <?php 
     include "../../includes/header.php";
     ?>
- <div style="background-image: url('../../images/foodList.jpg');">
+ <div style="background-image: url('../../images/You Stay at Home.png') ;">
 
     <div class="ht__bradcaump__wrap d-flex align-items-center">
       <div class="container">
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="bradcaump__inner text-center">
-              <h2 class="bradcaump-title">Food View</h2>
+              <h2 class="bradcaump-title">Food Details</h2>
                  <nav class="bradcaump-inner">
-                <a class="breadcrumb-item" href="foodList.php">Food Delivery</a>
+                <a class="breadcrumb-item" href="foodList.php">Food List</a>
                 <span class="brd-separetor"><i class="zmdi zmdi-long-arrow-right"></i></span>
-                <span class="breadcrumb-item active">Food List</span>
+                <span class="breadcrumb-item active">Food View</span>
               
               </nav>
               </nav>
@@ -63,12 +63,12 @@ $name = $_GET['food_id'];
 
   </div>
   <section class="type__category__area bg--white section-padding">
-     <div style="background-image: url('../../images/goodMenu.jpg');">
+     <div style="background-image: url('../../images/');">
 
   <div class="wrapper wrapper--w790">
     <div class="card card-5">
       <div class="card-heading">
-        <h2 class="title">View Food</h2>
+        <h2 class="title">Food's Details</h2>
       </div>
       <div class="card-body">
         <form action="" method="POST">
