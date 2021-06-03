@@ -1,3 +1,4 @@
+
 <?php
 session_start();
     // $_SESSION = [];
@@ -43,7 +44,7 @@ $view_variable = 'a string here';
     include "../../includes/header.php";
     ?>
 
-<div style="background-image: url('../../images/foodList.jpg');">
+<div style="background-image: url('../../images/You Stay at Home.png');">
     <div class="ht__bradcaump__wrap d-flex align-items-center">
       <div class="container">
         <div class="row">
@@ -51,7 +52,7 @@ $view_variable = 'a string here';
             <div class="bradcaump__inner text-center">
               <h2 class="bradcaump-title">Food List</h2>
               <nav class="bradcaump-inner">
-                <a class="breadcrumb-item" href="../../ApplicationLayer/ManageFoodInterface/foodHome.php">Food Delivery</a>
+                <a class="breadcrumb-item" href="../../ApplicationLayer/ManageLoginInterface/home.php">Food's Homepage</a>
                 <span class="brd-separetor"><i class="zmdi zmdi-long-arrow-right"></i></span>
                 <span class="breadcrumb-item active">Food List</span>
               </nav>
@@ -64,13 +65,13 @@ $view_variable = 'a string here';
 
   </div>
 <section class="type__category__area bg--white section-padding">
- <div style="background-image: url('../../images/goodMenu.jpg');">
+ <!--<div style="background-image: url('../../images/goodMenu.jpg');"> -->
   <div class="wrapper wrapper--w790">
     <div class="card card-5">
       <div class="card-heading">
         <h2 class="title">Food List</h2>
       </div>
-      <div class="card-body">
+    <div class="card-body">
   <center>
     <!-- <div class="content_resize2"> -->
       <!-- <center> -->
