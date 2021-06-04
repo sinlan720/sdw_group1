@@ -77,7 +77,7 @@ if (!isset($_SESSION['username'])) {
               <div class='name'>Name: </div>
               <div class='value'>
                 <div class='input-group'>
-                  <input type="text" name="name" value="<?=$row['medicine_name']?>" >
+                  <input style="font-size:20px; color:black; font-weight: bolder;" type="text" name="name" value="<?=$row['medicine_name']?>" >
                 </div>
               </div>
             </div>
@@ -85,15 +85,15 @@ if (!isset($_SESSION['username'])) {
               <div class='name'>Details: </div>
               <div class='value'>
                 <div class='input-group'>
-                  <input type="text" name="details" value="<?=$row['medicine_details']?>" >
+                  <input style="font-size:20px; color:black; font-weight: bolder;" type="text" name="details" value="<?=$row['medicine_details']?>" >
                 </div>
               </div>
             </div>
             <div class='form-row'>
-              <div class='name'>Price: </div>
+              <div class='name'>Price(RM): </div>
               <div class='value'>
                 <div class='input-group'>
-                  <input type="text" name="price" value="<?=$row['medicine_price']?>" >
+                  <input style="font-size:20px; color:black; font-weight: bolder;" type="text" name="price" value="<?=$row['medicine_price']?>" >
                 </div>
               </div>
             </div>
@@ -101,7 +101,7 @@ if (!isset($_SESSION['username'])) {
               <div class='name'>Quantity: </div>
               <div class='value'>
                 <div class='input-group'>
-                  <input type="text" name="quantity" value="<?=$row['medicine_quantity']?>" >
+                  <input style="font-size:20px; color:black; font-weight: bolder;" type="text" name="quantity" value="<?=$row['medicine_quantity']?>" >
                 </div>
               </div>
             </div>
