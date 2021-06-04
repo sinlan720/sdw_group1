@@ -10,6 +10,8 @@ if (!isset($_SESSION['username'])) {
   window.location = '../view';</script>";
 }
 
+
+
 if(isset($_POST['add'])){
   $medicine->add();
 }
