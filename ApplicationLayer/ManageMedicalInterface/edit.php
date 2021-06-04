@@ -69,7 +69,7 @@ if (!isset($_SESSION['username'])) {
               <div class='name'>ID: </div>
               <div class='value'>
                 <div class='input-group'>
-                  <input style="font-size:20px; color:black; font-weight: bolder;" type="text" name="medicine_id" value="<?=$row['medicine_id']?>" readonly>
+                  <input type="text" name="medicine_id" value="<?=$row['medicine_id']?>" readonly>
                 </div>
               </div>
             </div>
@@ -77,7 +77,7 @@ if (!isset($_SESSION['username'])) {
               <div class='name'>Name: </div>
               <div class='value'>
                 <div class='input-group'>
-                  <input style="font-size:20px; color:black; font-weight: bolder;" type="text" name="name" value="<?=$row['medicine_name']?>" >
+                  <input type="text" name="name" value="<?=$row['medicine_name']?>" >
                 </div>
               </div>
             </div>
@@ -85,7 +85,7 @@ if (!isset($_SESSION['username'])) {
               <div class='name'>Details: </div>
               <div class='value'>
                 <div class='input-group'>
-                  <input style="font-size:20px; color:black; font-weight: bolder;" type="text" name="details" value="<?=$row['medicine_details']?>" >
+                  <input type="text" name="details" value="<?=$row['medicine_details']?>" >
                 </div>
               </div>
             </div>
@@ -93,7 +93,7 @@ if (!isset($_SESSION['username'])) {
               <div class='name'>Price: </div>
               <div class='value'>
                 <div class='input-group'>
-                  <input style="font-size:20px; color:black; font-weight: bolder;" type="text" name="price" value="<?=$row['medicine_price']?>" >
+                  <input type="text" name="price" value="<?=$row['medicine_price']?>" >
                 </div>
               </div>
             </div>
@@ -101,7 +101,7 @@ if (!isset($_SESSION['username'])) {
               <div class='name'>Quantity: </div>
               <div class='value'>
                 <div class='input-group'>
-                  <input style="font-size:20px; color:black; font-weight: bolder;" type="text" name="quantity" value="<?=$row['medicine_quantity']?>" >
+                  <input type="text" name="quantity" value="<?=$row['medicine_quantity']?>" >
                 </div>
               </div>
             </div>
