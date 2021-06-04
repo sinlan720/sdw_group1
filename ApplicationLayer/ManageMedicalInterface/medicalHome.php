@@ -92,9 +92,6 @@ if (!isset($_SESSION['username'])) {
       } ?>
 
     </div>
-    <center>
-      <button class="btn btn--radius-2 btn--red"> <a href="../ManageLoginInterface/home.php">Back</a></button> 
-    </center>
   </div>
 </div>
 </div>
