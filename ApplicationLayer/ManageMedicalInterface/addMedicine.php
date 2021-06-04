@@ -85,7 +85,7 @@ input {
               </div>
             </div>
             <div class='form-row'>
-              <div class='name'>Price: </div>
+              <div class='name'>Price(RM): </div>
               <div class='value'>
                 <div class='input-group'>
                   <input type="text" name="price" class="input--style-5" required>
@@ -104,6 +104,7 @@ input {
               <center>
                 <button class="btn btn--radius-2 btn--red" type="submit" name="add" value="ADD"> Add</button>
                 <button class="btn btn--radius-2 btn--red" type="submit" name="reset" value="Reset"> Reset</button>
+                <button class="btn btn--radius-2 btn--red"> <a href="../ManageMedicalInterface/medicalHome.php">Back</a></button>
               </center>
             </div>
           </form>
