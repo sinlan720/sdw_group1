@@ -128,6 +128,8 @@ $view_variable = 'a string here';
         </table>
       </center>
       </div>
+    <center>
+      <button class="btn btn--radius-2 btn--red"> <a href="medicalHome.php">Back</a></button> </center>
     </center>
 </section>
 
