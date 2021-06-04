@@ -76,7 +76,7 @@ $name = $_GET['medicine_id'];
             <div class='form-row'>
               <div class='name'>Name: </div>
               <div class='value'>
-                <div style="font-size:20px; color:black; font-weight: bolder;" class='input-group'>
+                <div class='input-group'>
                   <?=$row['medicine_name']?>
                 </div>
               </div>
@@ -84,7 +84,7 @@ $name = $_GET['medicine_id'];
               <div class='form-row'>
               <div class='name'>Details: </div>
               <div class='value'>
-                <div style="font-size:20px; color:black; font-weight: bolder;" class='input-group'>
+                <div class='input-group'>
                   <?=$row['medicine_details']?>
                 </div>
               </div>
@@ -92,7 +92,7 @@ $name = $_GET['medicine_id'];
               <div class='form-row'>
               <div class='name'>Price: </div>
               <div class='value'>
-                <div style="font-size:20px; color:black; font-weight: bolder;" class='input-group'>
+                <div class='input-group'>
                   <?=$row['medicine_price']?>
                 </div>
               </div>
@@ -100,7 +100,7 @@ $name = $_GET['medicine_id'];
               <div class='form-row'>
               <div class='name'>Quantity: </div>
               <div class='value'>
-                <div style="font-size:20px; color:black; font-weight: bolder;" class='input-group'>
+                <div class='input-group'>
                   <?=$row['medicine_quantity']?>
                 </div>
               </div>
@@ -126,10 +126,7 @@ $name = $_GET['medicine_id'];
                   }?>
                 </center>
               </div>
-          <center>
-        <br></br>
-      <button class="btn btn--radius-2 btn--red"> <a href="medicineList.php">Back</a></button> </center>
-          </form></td>
+                </form></td>
             <?php } ?>
 </section>
 
