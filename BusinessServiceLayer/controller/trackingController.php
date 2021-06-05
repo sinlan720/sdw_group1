@@ -57,7 +57,13 @@ class trackingController{
         }
     }
 
-function viewStatus($tracking_ID)
+    function custDetails($tracking_ID){
+        $tracking = new trackingModel();
+        $tracking->tracking_ID = $tracking_ID;
+        return $tracking->custDetails();
+    }
+
+    function viewStatus($tracking_ID)
     {
         $tracking = new trackingModel();
         $tracking->tracking_ID = $tracking_ID;
@@ -79,26 +85,18 @@ function viewStatus($tracking_ID)
         }
     }
 
-    function updateProgress2($tracking_ID)
-    {
-        $status = new trackingModel();
-        $status->tracking_ID = $_POST['tracking_ID'];
-        // $status->status_ID = $_POST['status_ID'];
-        $status->tracking_date = $_POST['tracking_date'];
-        $status->tracking_time = $_POST['tracking_time'];
-        $status->tracking_progress = $_POST['tracking_progress'];
-        if ($status->updateProgress2()) {
-            $message = "I ran!";
-            echo "<script type='text/javascript'>alert('$message');
-        window.location = 'updateorderlist.php?tracking_ID=".$_POST['tracking_ID']."';</script>";
-        }
-    }
-
     function viewProgress($tracking_ID)
     {
         $status = new trackingModel();
         $status->tracking_ID = $tracking_ID;
         return $status->viewProgress();
+    }
+
+    function viewProgress2($tracking_ID)
+    {
+        $status = new trackingModel();
+        $status->tracking_ID = $tracking_ID;
+        return $status->viewProgress2();
     }
 
     function viewTrackingList()

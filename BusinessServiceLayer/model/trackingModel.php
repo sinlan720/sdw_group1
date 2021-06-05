@@ -24,13 +24,13 @@ class trackingModel{
     
     function viewUnacceptedTask()
     {
-        $sql = "select * from tracking join customer on tracking.cust_id = customer.cust_id where runner_status='Unaccepted'";
+        $sql = "select * from tracking inner join customer on tracking.cust_id = customer.cust_id where runner_status='Unaccepted'";
         return DB::run($sql);
     }
 
     function viewAcceptedTask()
     {
-        $sql = "select * from tracking join customer on tracking.cust_id = customer.cust_id where runner_status='Accepted' and runner_id = :runner_id and shipping_status not like 'Completed'";
+        $sql = "select * from tracking inner join customer on tracking.cust_id = customer.cust_id where runner_status='Accepted' and runner_id = :runner_id and shipping_status not like 'Completed'";
         $args = [':runner_id' => $this->runner_id];
         return DB::run($sql, $args);
     }
@@ -46,6 +46,13 @@ class trackingModel{
     {
         $sql = "update tracking set runner_status = :runner_status, runner_id = :runner_id where tracking_ID = :tracking_ID";
         $args = [':tracking_ID' => $this->tracking_ID, ':runner_status' => 'Unaccepted', ':runner_id' => $this->runner_id];
+        return DB::run($sql, $args);
+    }
+
+    function custDetails()
+    {
+        $sql = "select * from tracking inner join customer on tracking.cust_id = customer.cust_id where tracking_ID = :tracking_ID";
+        $args = [':tracking_ID' => $this->tracking_ID];
         return DB::run($sql, $args);
     }
 
@@ -65,18 +72,16 @@ class trackingModel{
         return $count;
     }
 
-    function updateProgress2()
-    {
-        $sql = "update status set tracking_date=:tracking_date, tracking_time=:tracking_time, tracking_progress=:tracking_progress where tracking_ID=:tracking_ID";
-        $args = [':tracking_ID' => $this->tracking_ID, ':tracking_date' => $this->tracking_date, ':tracking_time' => $this->tracking_time, ':tracking_progress' => $this->tracking_progress,];
-        $stmt = DB::run($sql, $args);
-        $count = $stmt->rowCount();
-        return $count;
-    }
-
     function viewProgress()
     {
         $sql = "select * from status where tracking_ID = :tracking_ID";
+        $args = [':tracking_ID' => $this->tracking_ID];
+        return DB::run($sql, $args);
+    }
+
+    function viewProgress2()
+    {
+        $sql = "select * from tracking where tracking_ID = :tracking_ID";
         $args = [':tracking_ID' => $this->tracking_ID];
         return DB::run($sql, $args);
     }

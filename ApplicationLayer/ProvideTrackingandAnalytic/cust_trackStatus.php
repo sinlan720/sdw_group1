@@ -17,16 +17,23 @@ $tracking = new trackingController();
 $customer = new customerController();
 $tracking_ID = $_GET['tracking_ID'];
 $data = $tracking->viewProgress($tracking_ID);
+$dt = $tracking->viewProgress2($tracking_ID);
 $cust_data = $customer->viewCustomer();
+
 foreach ($cust_data as $row2) {
   $name = $row2['cust_name'];
   $phone = $row2['cust_phone'];
 }
 
-
+$j=0;
+foreach ($dt as $r) {
+  $progress = $r['shipping_status'];
+  $j++;
+}
 
 if (isset($_POST['received'])){
   $tracking->updateDeliveryStatus();
+  $tracking->updateProgress($tracking_ID);
 }
 
 
@@ -75,39 +82,54 @@ if (isset($_POST['received'])){
       <h2 class="title">Customer Track</h2>
     </div>
     <div class="card-body">
-      <td align="center"><h2>Status</h2></td>
+    <h2>Status</h2>
+        <td>Tracking ID: <?=$tracking_ID?></td><br>
+        <td>Name: <?=$name?></td><br>
+        <td>Phone: <?=$phone?></td><br>
         <div>
           <center>
             <table>
               <thead>
-              <td>Tracking No</td>
-              <td>Name</td>
-              <td>Phone</td>
-              <td>DATE</td>
+              <td>Delivery Status</td>
+              <td>Date</td>
               <td>Time</td>
-              <td>Process</td>
-              <td>Action</td>
               </thead>
-              <tr>
-                <?php
+
+              <?php
                 $i = 1;
                 if (is_array($data) || is_object($data)){
                 foreach ($data as $row) {?>
-                  <td><?=$row['tracking_ID']?></td>
-                  <td><?=$name?></td>
-                  <td><?=$phone?></td>
+                <tr>
+                  <td><?=$row['tracking_progress']?></td>
                   <td><?=$row['tracking_date']?></td>
                   <td><?=$row['tracking_time']?></td>
-                  <td><?=$row['tracking_progress']?></td>
-                  <input type="hidden" name="tracking_ID" value="<?=$row['tracking_ID']?>">
-                  <td><form method="POST"><button type="submit" name="received" value="<?= $TrackID ?>">Confirm Received</button></form></td>
-                  <?php
+                  
+                  
+                  <td>
+                </tr>
+                <?php
                   $i++;
                 }
-              }
-                ?>            
+                }
+                ?>             
           </center>
             </table>
+            <br>
+            <?php 
+              if($progress=="On Delivery"){
+              ?>
+            <form method="POST">
+            <input type="hidden" name="tracking_ID" value="<?=$row['tracking_ID']?>">
+            <input type="hidden" name="tracking_progress" value="Completed">
+            <input type="hidden" class="form-control" name="tracking_date" value="<?=date("Y-m-d") ?>" readonly>
+            <input type="hidden" name="tracking_time" class="form-control" value="<?=date("H:i:s a") ?>" readonly>
+            <button type="submit" class="btn btn--radius-2 btn--green" name="received" value="<?= $TrackID ?>">Confirm Received</button>
+            </form></td>
+            <?php
+                  
+              
+              }
+              ?> 
         </div>
     </div>
   </div>

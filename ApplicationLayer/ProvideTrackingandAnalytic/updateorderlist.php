@@ -1,5 +1,6 @@
 <?php
 require_once '../../BusinessServiceLayer/controller/trackingController.php';
+require_once '../../BusinessServiceLayer/controller/customerController.php';
 date_default_timezone_set('Asia/Kuala_Lumpur');
 session_start();
     // $_SESSION = [];
@@ -14,17 +15,27 @@ if (!isset($_SESSION['username'])) {
 
 $tracking_ID = $_GET['tracking_ID'];
 
+$customer = new trackingController();
+$cust = $customer->custDetails($tracking_ID);
+
 $tracking = new trackingController();
 $data1 = $tracking->viewStatus($tracking_ID);
 
 $status = new trackingController($tracking_ID);
 $data2 = $status->viewProgress($tracking_ID);
+$data3 = $status->viewProgress($tracking_ID);
+
+$s=0;
+foreach ($data3 as $row) {
+$s++;
+}
 
 if (isset($_POST['update'])) {
     $status->updateProgress($tracking_ID);
 }
-if (isset($_POST['update2'])) {
-    $status->updateProgress2($tracking_ID);
+
+if (isset($_POST['reject'])) {
+  $tracking->rejectTask();
 }
 
 ?>
@@ -72,57 +83,114 @@ if (isset($_POST['update2'])) {
       <h2 class="title">Update Delivery List</h2>
     </div>
     <div class="card-body">
-      <table>
+
+    <table>
         <?php
         $i = 1;
-        foreach ($data1 as $row1) {
+        foreach ($cust as $row1) {
           ?>
-          <td>Tracking Number: <?=$row1['tracking_ID'] ?></td>
+          <tr>Tracking Number: <?=$row1['tracking_ID'] ?> </tr><br>
+          <tr>Customer Name: <?=$row1['cust_name']?></tr><br>
+          <tr>Customer Phone Number: <?=$row1['cust_phone']?></tr><br>
+          <tr>Customer Shipping Address:<?=$row1['shipping_address']?></tr>
         <?php 
 
         }?>
+
+      </table>
+<br>
+
+        <table>
         <form action="" method="POST">
         <tr>
         <td>Date: <input type="text" class="form-control" name="tracking_date" value="<?=date("Y-m-d") ?>" readonly></td>
         <td>Time:<input type="text" name="tracking_time" class="form-control" value="<?=date("H:i:s a") ?>" readonly></td>
         <td>Status:
-        <select class
-        ="form-control" name="tracking_progress">
-          <option value="" disabled selected>---Choose Status---</option>
-          <option value="Service order processing">Service order processing</option>
+        <select class="form-control" name="tracking_progress">
+        <?php
+        if($s==1){
+        ?>
+          <option value="" disabled>---Choose Status---</option>
+          <option value="Order picked up" disabled selected>Order picked up</option>
           <option value="Runner on the way destination">Runner on the way destination</option>
           <option value="Runner arrived">Runner arrived</option>
-        </select></td>
+        <?php
+        }elseif($s==2){
+        ?>
+          <option value="" disabled>---Choose Status---</option>
+          <option value="Order picked up" disabled>Order picked up</option>
+          <option value="Runner on the way destination" disabled selected>Runner on the way destination</option>
+          <option value="Runner arrived">Runner arrived</option>
+        <?php
+        }elseif($s==3){
+        ?>
+          <option value="" disabled>---Choose Status---</option>
+          <option value="Order picked up" disabled>Order picked up</option>
+          <option value="Runner on the way destination" disabled>Runner on the way destination</option>
+          <option value="Runner arrived" disabled selected>Runner arrived</option>
+        <?php
+        }elseif($s==0){
+        ?>
+          <option value="" disabled selected>---Choose Status---</option>
+          <option value="Order picked up" >Order picked up</option>
+          <option value="Runner on the way destination" >Runner on the way destination</option>
+          <option value="Runner arrived"  >Runner arrived</option>
+        <?php
+        }elseif($s>3){
+        ?>
+          <option value="" disabled >---Choose Status---</option>
+          <option value="Order picked up" disabled>Order picked up</option>
+          <option value="Runner on the way destination" disabled>Runner on the way destination</option>
+          <option value="Runner arrived" disabled >Runner arrived</option>
+          <option value="Runner arrived" disabled selected>---Completed---</option>         
+        <?php
+        }
+        ?></</td>
         <!-- <input type="hidden" name="status_ID" value="<?= $i ?>"> -->
-        <input type="hidden" name="tracking_ID" value="<?= $tracking_ID ?>">
-        <td><button type="submit" class="btn btn--radius-2 btn--blue" name="update">Update</button></td>
+        
+        <td><input type="hidden" name="tracking_ID" value="<?= $tracking_ID ?>">
+        <?php
+        if($s==0){
+        ?>
+        <button type="submit" class="btn btn--radius-2 btn--green" name="update">Update</button><br><br>
+        <button type="submit" class="btn btn--radius 2 btn--red" name="reject">Reject</button>
+        <?php
+        }else{
+        ?><button type="submit" class="btn btn--radius-2 btn--green" name="update">Update</button>
+        <?php
+        }
+        ?>
+        </td>
       </table>
-      <br><br><br>
+      <br><br>
         <div>
           <center>
             <table>
 
               <thead>
-              <td>DATE</td>
-              <td>TIME</td>
               <td>Status</td>
+              <td>Date</td>
+              <td>Time</td>
               </thead>
-              <tr>
-                <?php
+              
+              <?php
                 $i = 1;
                 foreach ($data2 as $row2) {
                   ?>
+                  <tr>
+                  <td><?=$row2['tracking_progress']?></td>
                   <td><?=$row2['tracking_date']?></td>
                   <td><?=$row2['tracking_time']?></td>
-                  <td><?=$row2['tracking_progress']?></td>
-        <td><button type="submit" class="btn btn--radius-2 btn--blue" name="update2">Update2</button></td>
+                  </tr>
                 <?php
                 $i++;
-                echo "<tr>";
                 }?>
-          </center>
             </table>
-              <button type="button" class="btn btn--radius-2 btn--red" onclick="location.href='orderlist.php?runner_id=<?=$_SESSION['runner_id']?>">CANCEL</button>
+          
+            
+            <br>
+            <button onclick="location.href='../../ApplicationLayer/ProvideTrackingandAnalytic/orderlist.php'" type="button" class="btn btn--radius-2 btn--blue">Back</button>
+          </center>
         </div>
     </div>
   </div>
