@@ -21,9 +21,6 @@ if (isset($_POST['accept'])) {
     $tracking->acceptTask();
 }
 
-if (isset($_POST['reject'])) {
-    $tracking->rejectTask();
-}
 
 ?>
 <!DOCTYPE html>
@@ -75,57 +72,66 @@ if (isset($_POST['reject'])) {
           <center>
             <table>
               <thead>
-              <td>NO</td>
-              <td>ADDRESS</td>
-              <td>ACTION</td>
+              <th style="text-align: center;">Customer Details</th>
+              <th>Tracking</th>
+              <th> ID</th>
+              <th style="text-align: center;">Action</th>
               </thead>
-              <tr>
-               <?php
-            $i = 1;
-            foreach ($data1 as $row1) { ?>
-          <form action="" method="POST">
-          <tr>
-            <input type="hidden" name="tracking_ID" value="<?=$row1['tracking_ID']?>">
-            <td><?=$row1['tracking_ID']?></td>
-            <td><?=$row1['shipping_address']?></td>
-            <td>
-              <button type="submit" class="btn--green btn radius 2" name="accept">Accept</button>
-            </td>
-            <?php
-              $i++;
-            }
-            ?> 
-          </tr>
-        </form>
-      </tr>
-              <tr></tr>
-          <td><h2>ON DELIVERY</h2></td>
+
+              <tbody>
+              <?php
+                $i = 1;
+                foreach ($data1 as $row1) { ?>
+
+                <tr>
+                  <td><?=$row1['cust_name']?><br><?=$row1['cust_phone']?><br><?=$row1['shipping_address']?></td>
+                  <td colspan="2" style="text-align: center;"><?=$row1['tracking_ID']?></td>
+                  <td>
+                    <form action="" method="POST">
+                      <input type="hidden" name="tracking_ID" value="<?=$row1['tracking_ID']?>">
+                      <button type="submit" class="btn--green btn radius 2" name="accept">Accept</button>
+                    </form>
+                  </td>
+                </tr>
+              <?php
+                $i++;
+                }
+              ?> 
+              
+            </tbody>
+            </table>
+        </div>
+        <br>
+        
+          <h2>ON DELIVERY</h2>
           <center>
             <table>
               <thead>
-              <td>NO</td>
-              <td>ADDRESS</td>
-              <td>ACTION</td>
+              <th style="text-align: center;">Customer Details</th>
+              <th>Tracking</th>
+              <th> ID</th>
+              <th style="text-align: center;">Action</th>
               </thead>
+              <?php
+              $i = 1;
+              foreach ($data2 as $row2) { ?>
+              
               <tr>
-                <?php
-            $i = 1;
-            foreach ($data2 as $row2) { ?>
-              <form action="" method="POST">
-          <tr>
-            <td><?=$row2['tracking_ID']?></td>
-            <td><?=$row2['shipping_address']?></td>
-            <td>
-              <input type="hidden" name="tracking_ID" value="<?= $row2['tracking_ID'] ?>">
-              <button type="button" class="btn radius 2 btn--blue" onclick="location.href='../ProvideTrackingandAnalytic/updateorderlist.php?tracking_ID=<?= $row2['tracking_ID'] ?>'">Update</button>
-            </td>
-            <td>
-              <button type="submit" class="btn radius 2 btn--red" name="reject">Reject</button>
-            </td>
-          <?php
-            $i++;
-            }
-          ?>
+                <td><?=$row2['cust_name']?><br><?=$row2['cust_phone']?><br><?=$row2['shipping_address']?></td>
+                <td colspan="2" style="text-align: center;"><?=$row2['tracking_ID']?></td>
+                <td>
+                  <form action="" method="POST">
+                    <input type="hidden" name="tracking_ID" value="<?= $row2['tracking_ID'] ?>">
+                    <button type="button" class="btn radius 2 btn--blue" onclick="location.href='../ProvideTrackingandAnalytic/updateorderlist.php?tracking_ID=<?= $row2['tracking_ID'] ?>'">Update</button>
+                    
+                  </form>
+                </td>
+              </tr>
+            
+            <?php
+              $i++;
+              }
+            ?>
           </center>
             </table>
         </div>
