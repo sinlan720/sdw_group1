@@ -37,6 +37,7 @@ input {
 
     <div style="background-image: url('../../images/goodList.jpg');">
 
+
     <div class="ht__bradcaump__wrap d-flex align-items-center">
       <div class="container">
         <div class="row">
