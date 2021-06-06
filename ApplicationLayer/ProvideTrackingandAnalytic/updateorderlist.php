@@ -20,10 +20,15 @@ $cust = $customer->custDetails($tracking_ID);
 
 $tracking = new trackingController();
 $data1 = $tracking->viewStatus($tracking_ID);
+$dt = $tracking->viewProgress2($tracking_ID);
 
 $status = new trackingController($tracking_ID);
 $data2 = $status->viewProgress($tracking_ID);
 $data3 = $status->viewProgress($tracking_ID);
+
+foreach ($dt as $r) {
+  $progress = $r['shipping_status'];
+}
 
 $s=0;
 foreach ($data3 as $row) {
@@ -150,13 +155,19 @@ if (isset($_POST['reject'])) {
         
         <td><input type="hidden" name="tracking_ID" value="<?= $tracking_ID ?>">
         <?php
-        if($s==0){
+        if($progress=="On Delivery"){
+          if($s==0){
         ?>
         <button type="submit" class="btn btn--radius-2 btn--green" name="update">Update</button><br><br>
         <button type="submit" class="btn btn--radius 2 btn--red" name="reject">Reject</button>
         <?php
-        }else{
+          }else{
         ?><button type="submit" class="btn btn--radius-2 btn--green" name="update">Update</button>
+        <?php
+          }
+        }elseif($progress=="Delivered"){
+        ?>
+        <button type="submit" class="btn btn--radius-2 btn--green" disabled>Completed</button>
         <?php
         }
         ?>
