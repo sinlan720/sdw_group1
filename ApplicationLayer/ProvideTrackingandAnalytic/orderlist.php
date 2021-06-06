@@ -67,7 +67,8 @@ if (isset($_POST['accept'])) {
       <h2 class="title">Delivery List</h2>
     </div>
     <div class="card-body">
-      <td align="center"><h2>PENDING</h2></td>
+      <h2 style="text-align:center;">PENDING</h2>
+      <br>
         <div>
           <center>
             <table>
@@ -103,7 +104,8 @@ if (isset($_POST['accept'])) {
         </div>
         <br>
         
-          <h2>ON DELIVERY</h2>
+          <h2 style="text-align:center;">ON DELIVERY</h2>
+          <br>
           <center>
             <table>
               <thead>
