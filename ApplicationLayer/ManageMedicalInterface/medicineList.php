@@ -29,15 +29,41 @@ $view_variable = 'a string here';
     //     // $args = [':name'=>$this->name, ':quantity'=>$this->quantity, ':price'=>$this->price];
     //     DB::run($sql,$args);
 }
+if(isset($_POST['search']))
+{
+    $valueToSearch = $_POST['valueToSearch'];
+    // search in all table columns
+    // using concat mysql function
+    $query = "SELECT * FROM `medicine` WHERE CONCAT(`id`, `fname`, `lname`, `age`) LIKE '%".$valueToSearch."%'";
+    $search_result = filterTable($query);
+    
+}
+ else {
+    $query = "SELECT * FROM `medicine`";
+    $search_result = filterTable($query);
+}
+
+// function to connect and execute the query
+function filterTable($query)
+{
+    $connect = mysqli_connect("localhost", "root", "", "SDW");
+    $filter_Result = mysqli_query($connect, $query);
+    return $filter_Result;
+}
 
 ?>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 <?php include"../../includes/head.php";?>
-
+<style>
+  td {
+    font-size:20px; color:black; font-weight: bolder;
+  }
+  th {
+    font-size:20px; color:black; font-weight: bolder;
+  }
+</style>
 <body>
-
-
   <div class="wrapper" id="wrapper">
     <?php 
     include "../../includes/header.php";
@@ -75,6 +101,8 @@ $view_variable = 'a string here';
   <center>
     <!-- <div class="content_resize2"> -->
       <!-- <center> -->
+      <form action="search.php" method="post">
+            <p style= "font-size:20px; font-weight: bolder;"> Click this button to search for Medicine <input type="submit" style="height:40px; width: 150px; background-color:#CCCCFF;" name="search" value="Search Medicine"><br><br></p>
       <table>
             <thead>
             <th>Name</th>
@@ -96,6 +124,7 @@ $view_variable = 'a string here';
                        // . "<td>".$row['medicine_price']."</td>";
                ?>
                  <td></td>
+
             <td><form action="" method="POST">
               <?php
               if ($_SESSION['usergroup'] == 1) {
@@ -108,6 +137,7 @@ $view_variable = 'a string here';
               <input type="hidden" name="quantity" value="1">
               <button class="btn btn--radius-2 btn--red" type="submit" name="buy" value="BUY">Buy</button>
                <br></br>
+
               <?php
             } elseif ($_SESSION['usergroup'] == 2){ ?>
               <button class="btn btn--radius-2 btn--red" input type="button" name="view" value="View" onclick="location.href='../../ApplicationLayer/ManageMedicalInterface/view.php?medicine_id=<?=$row['medicine_id']?>'">View</button>
@@ -116,6 +146,7 @@ $view_variable = 'a string here';
                <br></br>
               <input type="hidden" name="medicine_id" value="<?=$row['medicine_id']?>"><button class="btn btn--radius-2 btn--red" input type="submit" name="delete" value="Delete">Delete</button>
                <br></br>
+
               <?php
             }?>
 
